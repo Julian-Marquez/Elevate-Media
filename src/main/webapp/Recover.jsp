@@ -58,6 +58,22 @@
     </style>
 
 </head>
+
+<%
+
+ServletContext context = request.getServletContext();
+
+long message = 0;
+
+try{
+	 message = (long) context.getAttribute("message");
+
+}catch(NullPointerException e){
+	
+}
+
+%>
+
 <body>
 <nav style="background:black; height:100px;" class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
   <div class="container-fluid">
@@ -95,21 +111,27 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="login-box text-center">
-                    <h3 class="login-title">Login to Elevate Media</h3>
-                    <form action="Account" method="get">
+                    <h3 class="login-title">Recover Account</h3>
+                    <form action="Recover" method="post">
+                  <%   if(message == 0){
+                	  
+                	  %>
                         <div class="form-group text-left">
-                            <label>Email address</label>
-                            <input type="email" class="form-control" name="email" required placeholder="Enter your email">
+                            <label>Email or Username</label>
+                            <input type="text" class="form-control" name="email" required placeholder="Enter your email or user">
                         </div>
+                         <button type="submit" name="action" value="sendCode" class="btn btn-login btn-block mt-4">Send Code</button>
+                   <%}else{     %>
                         <div class="form-group text-left">
-                            <label>Password</label>
-                            <input type="password" class="form-control" name="password" required placeholder="Enter your password">
+                            <label>Code</label>
+                            <input type="number" class="form-control" min="10000000" step="0" name="code" required placeholder="Code from Email">
                         </div>
-                        <button type="submit" class="btn btn-login btn-block mt-4">Login</button>
+                         <button type="submit" name="action" value="submit" class="btn btn-login btn-block mt-4">Submit</button>
+                  <% }      %>
+                       
                     </form>
                     <p class="mt-3">Don't have an account? <a href="register.jsp">Sign up here</a></p>
                     <div class='row'>
-                	<p class='mt-3'> <a href='Recover.jsp'>Forgot Password</a>
                 </div>
                 </div>
                 

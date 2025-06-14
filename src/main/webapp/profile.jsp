@@ -32,7 +32,28 @@
 <!-- Only ONE Bootstrap Bundle JS for Bootstrap 5 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<%
 
+boolean Show = false;
+
+try{
+	
+Show = (boolean) context.getAttribute("updateMessage");
+
+}catch(NullPointerException e){
+	Show = false;
+}
+
+if(Show){ %>
+
+<script >
+
+alert("We recomend you update your pasword with the edit Profile button");
+
+</script>
+<%
+context.removeAttribute("updateMessage");
+} %>
     <style>
         body {
             background: url('uploads/elevate-bg2.png') no-repeat center center fixed;
@@ -182,11 +203,13 @@
                     <% } %>
                     </div>
                 <div class="profile-actions">
-                    <a href="editProfile.jsp" class="btn btn-primary btn-sm mr-2">Edit Profile</a>
+                    <a href="editProfile.jsp" class="sim-btn btn-hover-new"><span>Edit Profile</span></a>
+                    <div class="row">
                     <form action="handleAccount" method="get" class="d-inline">
-                        <button type="submit" name="action" value="logout" class="btn btn-secondary btn-sm">Logout</button>
-                        <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm ml-2">Delete Account</button>
+                        <button type="submit" name="action" value="logout" style="background-color: #FFA500;"  class="sim-btn btn-hover-new"><span>Logout</span></button>
+                        <button type="submit" name="action" value="delete" style="background-color: #800000;" class="sim-btn btn-hover-new"><span>Delete Account</span></button>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
